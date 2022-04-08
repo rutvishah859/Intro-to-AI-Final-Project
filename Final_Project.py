@@ -1,5 +1,6 @@
 import requests
 import folium
+import os
 latitude = 43.6532
 longitude = -79.3832
 
@@ -10,7 +11,7 @@ url = "https://api.foursquare.com/v3/places/search?ll=43.6532%2C-79.3832"
 
 headers = {
     "Accept": "application/json",
-    "Authorization": "fsq389G1dW5rpyZXK8hM8aYJrVfIQulRs+pclsWRnaFed1I="
+    "Authorization": os.getenv("AUTHORIZATION")
 }
 
 response = requests.request("GET", url, headers=headers)
