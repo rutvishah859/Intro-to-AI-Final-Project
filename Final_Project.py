@@ -1,6 +1,10 @@
 import requests
 import folium
+from dotenv import load_dotenv
 import os
+
+load_dotenv()
+
 latitude = 43.6532
 longitude = -79.3832
 
