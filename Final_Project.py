@@ -14,12 +14,19 @@ headers = {
 }
 
 dataset = pd.read_csv('Age_Vs_Crime.csv')
+school_count = [0] * 140
 neighborhoods = dataset.columns[:]
-for n in neighborhoods:
-    print(n)
-    url = "https://api.foursquare.com/v3/places/search?query=primary_school%2C%20elementary_school%2C%20secondary_school&near={}%2C%20Toronto".format(n)
+for n in range(len(neighborhoods) - 1):
+    url = "https://api.foursquare.com/v3/places/search?query=school&near={}%2C%20Toronto".format(neighborhoods[n])
     response = requests.request("GET", url, headers=headers).json()
-    print(response["results"])
+
+    names = ["elementary", "primary", "preschool", "middle", "high", "secondary"]
+    for i in response["results"]:
+        for j in i["categories"]:
+            if any(name in j["name"].lower() for name in names):
+                school_count[n] += 1
+
+print(school_count)
 
 
 
